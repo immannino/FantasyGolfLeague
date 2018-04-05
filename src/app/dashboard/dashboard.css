@@ -3,3 +3,26 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1;
 }
+
+.table {
+    height: 80vh;
+    overflow: scroll;
+}
+mat-card {
+    margin: 10px;
+    background: linear-gradient(to top left, #076652, #0dc29c);
+    color: white;
+}
+
+button {
+    margin-left: 10px;
+    color: white;
+    background-color: #0dc29c;
+}
+button:hover {
+    background-color: #076652;
+}
+
+/* mat-table {
+    background: linear-gradient(white, #076652);
+} */

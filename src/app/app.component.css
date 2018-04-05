@@ -7,18 +7,3 @@
     height: 35px;
     width: 35px;
 }
-mat-card {
-    background: linear-gradient(to top left, #076652, #0dc29c);
-    color: white;
-}
-
-#create {
-    color: #076652;
-    background-color: white;
-    margin: auto;
-}
-
-#create:hover{
-    color: white;
-    background-color: #0b9d7e;
-}

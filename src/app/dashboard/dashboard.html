@@ -1,4 +1,5 @@
-<mat-toolbar>
+<!-- <mat-toolbar>
+    <span></span>
     <select>
         <option>tournament1</option>
         <option>tournament2</option>
@@ -10,8 +11,8 @@
     <button mat-raised-button>Tournaments</button>
     <button mat-raised-button>Leaderboard</button>
     <button mat-raised-button>Settings</button>
-</mat-toolbar>
-<div class="container">
+</mat-toolbar> -->
+<!-- <div class="container">
     <mat-card>
         <mat-card-title>Participants</mat-card-title>
         <div>
@@ -28,4 +29,76 @@
                 <button mat-raised-button>edit</button></div>
     </mat-card>
     <mat-card>Statistics</mat-card>
+</div> -->
+
+<div class="table mat-elevation-z8" *ngIf="tournamentData.leaderboard">
+    <mat-card>
+        <div>
+            {{tournamentData.leaderboard.tournament_name}} 
+        </div>
+        <div>
+            Round: {{tournamentData.leaderboard.current_round}} Status: 
+            {{tournamentData.leaderboard.round_state}}
+        </div>
+    </mat-card>
+
+    <button mat-raised-button (click)="getFullTournamentData()">Refresh</button>
+    <mat-table #table [dataSource]="tableDataSource" matSort>
+        <!-- Position Column -->
+        <ng-container matColumnDef="current_position">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Position </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.current_position}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="player_bio">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Player </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.player_bio.first_name}} {{player.player_bio.last_name}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="today">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Round Score </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.today}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Overall Score </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.total}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="thru">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Thru </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.thru}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="teeTime">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Tee Time </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{trimDate(player.rounds[player.current_round - 1].tee_time)}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="R1">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> R1 </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.rounds[player.current_round - 1].strokes}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="R2">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> R2 </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.rounds[player.current_round - 1].strokes}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="R3">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> R3 </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.rounds[player.current_round - 1].strokes}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="R4">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> R4 </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{player.rounds[player.current_round - 1].strokes}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 </div>
