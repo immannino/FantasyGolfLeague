@@ -122,6 +122,10 @@ MIT
 MIT
 MIT
 
+@angular/router@5.2.9
+MIT
+MIT
+
 @angular/common@5.2.9
 MIT
 MIT
@@ -174,11 +178,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-@angular/animations@5.2.9
+@angular/forms@5.2.9
 MIT
 MIT
 
-@angular/forms@5.2.9
+@angular/animations@5.2.9
 MIT
 MIT
 
