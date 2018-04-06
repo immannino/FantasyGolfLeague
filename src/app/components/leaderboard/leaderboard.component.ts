@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { PgaTourService } from '../lib/pgatour/pgatour.service';
-import { TournamentData, CurrentTournament } from '../lib/pgatour/pgatour.model';
+import { PgaTourService } from '../../lib/pgatour/pgatour.service';
+import { TournamentData, CurrentTournament } from '../../lib/pgatour/pgatour.model';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
-  selector: 'dashboard',
-  templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.css']
+  selector: 'leaderboard',
+  templateUrl: './leaderboard.html',
+  styleUrls: ['./leaderboard.css']
 })
-export class DashboardComponent {
+export class LeaderboardComponent {
     constructor(private pgatourService: PgaTourService) {}
     tournamentMetaData: CurrentTournament;
     tournamentData: TournamentData;
@@ -58,8 +58,4 @@ export class DashboardComponent {
         this.tournamentData = data;
       })
     }
-}
-
-function compare(a, b, isAsc) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
