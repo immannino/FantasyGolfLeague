@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { PgaTourService } from '../../lib/pgatour/pgatour.service';
-import { TournamentData, CurrentTournament } from '../../lib/pgatour/pgatour.model';
+import { TournamentData, CurrentTournament, Player } from '../../lib/pgatour/pgatour.model';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
@@ -12,30 +12,23 @@ export class LeaderboardComponent {
     constructor(private pgatourService: PgaTourService) {}
     tournamentMetaData: CurrentTournament;
     tournamentData: TournamentData;
-    displayedColumns = ['current_position', 'player_bio', 'today', 'total', 'thru', 'teeTime', 'R1', 'R2', 'R3', 'R4'];
+    // displayedColumns = ['current_position', 'player_bio', 'today', 'total', 'thru', 'teeTime', 'R1', 'R2', 'R3', 'R4'];
+    displayedColumns = ['current_position', 'player_bio', 'today', 'total', 'thru', 'R1', 'R2', 'R3', 'R4'];
     tableDataSource: any;
 
     @ViewChild(MatSort) sort: MatSort;
 
     trimDate = (date): string =>  String(date).substring(11);
-    
+    filterPosition = (player: Player): string => player.status.toLowerCase() === 'cut' ? 'CUT' : player.current_position;
+    isCut = (player: Player): boolean => player.status.toLowerCase() === 'cut' ? true : false;
+    filterScore = (score: number): string => score > 0 ? "+" + score : score < 0 ? String(score) : "E";
+    setScoreColor = (score: number) => score > 0 ? 'green' : score < 0 ? 'red' : 'black';
+
     ngOnInit() {
       this.tournamentData = new TournamentData();
       this.tournamentMetaData = new CurrentTournament();
 
       this.getTournamentMetadata();
-    }
-    
-    filterScore(score: number): string {
-      if (score > 0 ) { return "+" + score; }
-      else if (score < 0) { return String(score); }
-      else { return "E"; } 
-    }
-
-    setScoreColor(score: number) {
-      if (score > 0) { return 'green'; }
-      else if (score < 0) { return 'red'; }
-      else { return 'black'; }
     }
 
     getTournamentMetadata() {

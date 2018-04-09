@@ -1,0 +1,21 @@
+<mat-card class="team" [style.background-color]="team.teamColor">
+    <mat-card-title style="color: white;">{{team.teamName}}</mat-card-title>
+    <mat-card-subtitle>{{team.firstName}} {{team.lastName}}</mat-card-subtitle>
+    <mat-card-content>
+        <mat-card class="player" *ngFor="let player of team.players">
+            {{player.player_bio.first_name}} {{player.player_bio.last_name}}
+        </mat-card>
+        <form class="player-search-form" *ngIf="isAddNewPlayer">
+            <mat-form-field class="form-element">
+                <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="playerControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let player of filteredPlayers | async" [value]="player">
+                        {{ player }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <button class="form-element" mat-raised-button (click)="addNewPlayer()">Submit</button>
+        </form>
+        <button mat-raised-button (click)="toggleAddNewPlayer()">Add Player</button>
+    </mat-card-content>
+</mat-card>

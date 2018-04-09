@@ -1,0 +1,8 @@
+<div class="container">
+    <mat-toolbar>
+        <add-team (teamAdded)="handleNewTeam($event)"></add-team>
+    </mat-toolbar>
+    <div class="teams" *ngIf="league.teams">
+        <team-card *ngFor="let team of league.teams" [team]="team"></team-card>
+    </div>
+</div>

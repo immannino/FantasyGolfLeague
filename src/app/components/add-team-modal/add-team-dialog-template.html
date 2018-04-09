@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Register a new team</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <textarea matInput placeholder="Team Name" matTextareaAutosize matAutosizeMinRows="2"
+    matAutosizeMaxRows="5" [(ngModel)]="data.teamName"></textarea>
+  </mat-form-field><br>
+  <mat-form-field>
+      <textarea matInput placeholder="First Name" matTextareaAutosize matAutosizeMinRows="2"
+      matAutosizeMaxRows="5" [(ngModel)]="data.firstName"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+      <textarea matInput placeholder="Last Name" matTextareaAutosize matAutosizeMinRows="2"
+      matAutosizeMaxRows="5" [(ngModel)]="data.lastName"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Email Address" [(ngModel)]="data.email">
+  </mat-form-field>
+  <p>Whats your favorite color?</p>
+  <mat-form-field>
+    <input matInput type="color" [(ngModel)]="data.teamColor">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

@@ -4,6 +4,10 @@
     grid-template-rows: 1;
 }
 
+.table {
+    /* background: linear-gradient(white, #076652); */
+}
+
 .table-data {
     height: 80vh;
     overflow: scroll;
@@ -25,6 +29,7 @@ button {
 button:hover {
     background-color: #076652;
 }
-/* mat-table {
-    background: linear-gradient(white, #076652);
-} */
+
+.is-cut {
+    background-color: #dddddd;
+}
