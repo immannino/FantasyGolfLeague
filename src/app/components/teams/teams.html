@@ -3,6 +3,6 @@
         <add-team (teamAdded)="handleNewTeam($event)"></add-team>
     </mat-toolbar>
     <div class="teams" *ngIf="league.teams">
-        <team-card *ngFor="let team of league.teams" [team]="team"></team-card>
+        <team-card *ngFor="let team of league.teams; let i = index;" [team]="team" (teamDeleted)="deleteTeam(i)"></team-card>
     </div>
 </div>

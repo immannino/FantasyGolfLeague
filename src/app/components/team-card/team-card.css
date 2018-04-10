@@ -45,6 +45,34 @@
     margin-left: 5px;
 }
 
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 3px;
+}
+
+.edit:hover {
+    background-color: lightslategray;
+    cursor: pointer;
+}
+.dice-icon {
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+}
+
+.delete-team {
+    background-color: red;
+    color: white;
+    width: 100%;
+    margin-top: 3px;
+}
+
+.delete-team:hover {
+    background-color: darkred;
+    cursor: pointer;
+}
+
 mat-autocomplete {
     overflow: scroll;
     -webkit-overflow-scrolling: touch;

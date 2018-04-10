@@ -1,5 +1,11 @@
 <mat-card class="team" [style.background-color]="team.teamColor">
-    <mat-card-title class="title" style="color: white;"><span>{{team.teamName}}</span><img class="icon" alt="Edit Team" src="./assets/edit.svg" [ngClass]="{'icon-active': isEditable}" (click)="toggleEditable()"></mat-card-title>
+    <mat-card-title class="title" style="color: white;">
+        <span>{{team.teamName}}</span>
+        <span>
+            <img class="icon" alt="Edit Team" src="./assets/edit.svg" [ngClass]="{'icon-active': isEditable}" (click)="toggleEditable()">
+            <span *ngIf="isEditable" style="font-size: 12px;color: black;">Editting</span>
+        </span>
+    </mat-card-title>
     <mat-card-subtitle>{{team.firstName}} {{team.lastName}}</mat-card-subtitle>
     <mat-card-content>
         <mat-card class="player" *ngFor="let player of team.players; let i = index;">
@@ -18,8 +24,10 @@
             <button class="form-element" mat-raised-button (click)="addNewPlayer()">Submit</button>
         </form>
         <div class="button-group" *ngIf="isEditable">
-            <button mat-raised-button (click)="toggleAddNewPlayer()" [disabled]="team.players.length == maxPlayers">Add Player</button>
-            <button mat-raised-button (click)="selectRandomPlayers()" *ngIf="team.players.length !== maxPlayers">Randomize</button>
+            <button mat-raised-button class="edit" (click)="toggleAddNewPlayer()" [disabled]="team.players.length == maxPlayers">Add Player</button>
+            <button mat-raised-button class="edit" (click)="selectRandomPlayers()" *ngIf="team.players.length !== maxPlayers"><img class="dice-icon" alt="" src="./assets/dice.svg">Randomize</button>
         </div>
+        <button mat-raised-button class="delete-team" (click)="order66()" *ngIf="isEditable">Delete Team</button>
+
     </mat-card-content>
 </mat-card>

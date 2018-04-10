@@ -14,3 +14,7 @@ router-outlet {
 .footer {
     font-size: 10px;
 }
+
+.acknowledgement {
+    height: 20px;
+}

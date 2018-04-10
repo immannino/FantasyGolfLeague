@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Team } from '../../lib/model/team.model';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -17,6 +17,9 @@ export class TeamCardComponent {
   team: Team;
   @Input()
   maxPlayers; number;
+  @Output()
+  teamDeleted: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   isAddNewPlayer: boolean = false;
   playerControl: FormControl = new FormControl();
   players = [];
@@ -61,6 +64,25 @@ export class TeamCardComponent {
     }
 
     this.playerControl.reset();
+  }
+
+  /** 
+   * Its been a good run comrade, but every rose has it's thorn. 
+   * 
+   * Live long, and prosper.
+   * 
+   * Goodnight sweet prince.
+  */
+  order66() {
+    //Eventually make a firebase call and delete this teams index or some shit
+    // currently just beam me up. (Tell parent component to remove me from list of teams)
+    // Update team to have a firebase ID or some shit.
+
+    //Add confirmation popup:
+    // 1. Display team name in card dialog
+    // 2. Ask to type in Team Name to confirm delete
+    // Have delete button disabled until team name typed is same as team name
+    this.teamDeleted.emit(true);
   }
 
   loadPlayersList() {

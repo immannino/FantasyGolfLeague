@@ -1,16 +1,16 @@
 .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1;
+    width: 100%;
 }
 
 .table {
+    overflow-x: scroll;
     /* background: linear-gradient(white, #076652); */
 }
 
 .table-data {
     height: 80vh;
     overflow: scroll;
+    min-width: 500px;
     -webkit-overflow-scrolling: touch;
 }
 

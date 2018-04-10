@@ -78,8 +78,13 @@ export class TeamComponent {
     this.league.teams.push(new Team("Team Spike", "Spike", "McBullah", this.randomHexColorCode(), "email@test.ts"));
     this.league.teams.push(new Team("Team Schmidt", "Schmidt", "", this.randomHexColorCode(), "email@test.ts"));
     this.league.teams.push(new Team("Team Tys", "Matty", "Tys", this.randomHexColorCode(), "email@test.ts"));
-    this.league.teams.push(new Team("Team Neppach", "Mike", "Neppach", this.randomHexColorCode(), "email@test.ts"));
+    this.league.teams.push(new Team("Team Neppach", "Mike", "Biggums", this.randomHexColorCode(), "email@test.ts"));
     this.league.teams.push(new Team("Team Tones", "Tones", "McBones", this.randomHexColorCode(), "email@test.ts"));
+    this.league.teams.push(new Team("Team Brock", "Brock", "Samford", this.randomHexColorCode(), "email@test.ts"));
+  }
+
+  deleteTeam(index: number) {
+    this.league.teams.splice(index, 1);
   }
 
   randomHexColorCode = () => {

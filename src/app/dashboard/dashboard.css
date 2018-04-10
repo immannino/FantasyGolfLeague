@@ -10,6 +10,11 @@
     -webkit-overflow-scrolling: touch;
 }
 
+.button-group {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
 mat-card {
     margin: 10px;
     background: linear-gradient(to top left, #076652, #0dc29c);
