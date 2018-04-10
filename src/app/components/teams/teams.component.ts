@@ -15,7 +15,7 @@ export class TeamComponent {
   ngOnInit() {
     this.league = new League();
     this.league.teams = new Array<Team>();
-    // this.createLeagueTeams();
+    this.createLeagueTeams();
   }
 
   handleNewTeam(newTeam: Team) {
@@ -23,7 +23,11 @@ export class TeamComponent {
   }
   createLeagueTeams() {
 
-    let players: Player[] = new Array<Player>();
+    // let players: Player[] = new Array<Player>();
+    // let players2: Player[] = new Array<Player>();
+    // let players3: Player[] = new Array<Player>();
+    // let players4: Player[] = new Array<Player>();
+    // let players5: Player[] = new Array<Player>();
     let player: Player = new Player();
     player.current_position = "T5";
     player.current_round = 4;
@@ -35,17 +39,47 @@ export class TeamComponent {
     player.today = -5;
     player.total = -10;
 
-    players.push(player);
-    players.push(player);
-    players.push(player);
-    players.push(player);
-    players.push(player);
+    // players.push(player);
+    // players.push(player);
+    // players.push(player);
+    // players.push(player);
+    // players.push(player);
 
-    this.league.teams.push(new Team("Team Spike", "Spike", "McBullah", this.randomHexColorCode(), "email@test.ts", players));
-    this.league.teams.push(new Team("Team Schmidt", "Schmidt", "", this.randomHexColorCode(), "email@test.ts", players));
-    this.league.teams.push(new Team("Team Tys", "Matty", "Tys", this.randomHexColorCode(), "email@test.ts", players));
-    this.league.teams.push(new Team("Team Neppach", "Mike", "Neppach", this.randomHexColorCode(), "email@test.ts", players));
-    this.league.teams.push(new Team("Team Tones", "Tones", "McBones", this.randomHexColorCode(), "email@test.ts", players));
+    // players2.push(player);
+    // players2.push(player);
+    // players2.push(player);
+    // players2.push(player);
+    // players2.push(player);
+
+    // players3.push(player);
+    // players3.push(player);
+    // players3.push(player);
+    // players3.push(player);
+    // players3.push(player);
+
+    // players4.push(player);
+    // players4.push(player);
+    // players4.push(player);
+    // players4.push(player);
+    // players4.push(player);
+
+    // players5.push(player);
+    // players5.push(player);
+    // players5.push(player);
+    // players5.push(player);
+    // players5.push(player);
+
+    // this.league.teams.push(new Team("Team Spike", "Spike", "McBullah", this.randomHexColorCode(), "email@test.ts", players));
+    // this.league.teams.push(new Team("Team Schmidt", "Schmidt", "", this.randomHexColorCode(), "email@test.ts", players2));
+    // this.league.teams.push(new Team("Team Tys", "Matty", "Tys", this.randomHexColorCode(), "email@test.ts", players3));
+    // this.league.teams.push(new Team("Team Neppach", "Mike", "Neppach", this.randomHexColorCode(), "email@test.ts", players4));
+    // this.league.teams.push(new Team("Team Tones", "Tones", "McBones", this.randomHexColorCode(), "email@test.ts", players5));
+
+    this.league.teams.push(new Team("Team Spike", "Spike", "McBullah", this.randomHexColorCode(), "email@test.ts"));
+    this.league.teams.push(new Team("Team Schmidt", "Schmidt", "", this.randomHexColorCode(), "email@test.ts"));
+    this.league.teams.push(new Team("Team Tys", "Matty", "Tys", this.randomHexColorCode(), "email@test.ts"));
+    this.league.teams.push(new Team("Team Neppach", "Mike", "Neppach", this.randomHexColorCode(), "email@test.ts"));
+    this.league.teams.push(new Team("Team Tones", "Tones", "McBones", this.randomHexColorCode(), "email@test.ts"));
   }
 
   randomHexColorCode = () => {

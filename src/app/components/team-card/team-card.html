@@ -1,11 +1,12 @@
 <mat-card class="team" [style.background-color]="team.teamColor">
-    <mat-card-title style="color: white;">{{team.teamName}}</mat-card-title>
+    <mat-card-title class="title" style="color: white;"><span>{{team.teamName}}</span><img class="icon" alt="Edit Team" src="./assets/edit.svg" [ngClass]="{'icon-active': isEditable}" (click)="toggleEditable()"></mat-card-title>
     <mat-card-subtitle>{{team.firstName}} {{team.lastName}}</mat-card-subtitle>
     <mat-card-content>
-        <mat-card class="player" *ngFor="let player of team.players">
-            {{player.player_bio.first_name}} {{player.player_bio.last_name}}
+        <mat-card class="player" *ngFor="let player of team.players; let i = index;">
+            <p><a *ngIf="isEditable" class="delete" (click)="removePlayer(i);">x</a> {{player.player_bio.first_name}} {{player.player_bio.last_name}}</p>
         </mat-card>
         <form class="player-search-form" *ngIf="isAddNewPlayer">
+            <a class="delete" (click)="toggleAddNewPlayer()">x</a>
             <mat-form-field class="form-element">
                 <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="playerControl" [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete">
@@ -16,6 +17,9 @@
             </mat-form-field>
             <button class="form-element" mat-raised-button (click)="addNewPlayer()">Submit</button>
         </form>
-        <button mat-raised-button (click)="toggleAddNewPlayer()">Add Player</button>
+        <div class="button-group" *ngIf="isEditable">
+            <button mat-raised-button (click)="toggleAddNewPlayer()" [disabled]="team.players.length == maxPlayers">Add Player</button>
+            <button mat-raised-button (click)="selectRandomPlayers()" *ngIf="team.players.length !== maxPlayers">Randomize</button>
+        </div>
     </mat-card-content>
 </mat-card>

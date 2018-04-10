@@ -7,3 +7,10 @@
     height: 35px;
     width: 35px;
 }
+
+router-outlet {
+    min-height: calc(100vh - 70px);
+}
+.footer {
+    font-size: 10px;
+}

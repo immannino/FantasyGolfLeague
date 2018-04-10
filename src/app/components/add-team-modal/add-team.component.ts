@@ -37,10 +37,10 @@ export class AddTeamComponent {
       dialogRef.afterClosed().subscribe(teamInfo => {
         this.tempTeam = teamInfo;
 
-        if (this.isValidTeam()) {
+        if (this.tempTeam && this.isValidTeam()) {
           this.teamAdded.emit(this.tempTeam);
         }
-
+        
         this.tempTeam = null;
       });
     }

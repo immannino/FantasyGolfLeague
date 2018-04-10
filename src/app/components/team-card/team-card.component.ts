@@ -15,35 +15,24 @@ import { PgaTourService } from '../../lib/pgatour/pgatour.service';
 export class TeamCardComponent {
   @Input()
   team: Team;
+  @Input()
+  maxPlayers; number;
   isAddNewPlayer: boolean = false;
   playerControl: FormControl = new FormControl();
   players = [];
-  // players = [
-  //   'Tiger Woods',
-  //   'Rory McIlroy',
-  //   'Bubba Watson',
-  //   'Jordan Spieth',
-  //   'Patric Reed',
-  //   'Rickie Fowler',
-  //   'Henrik Stenson',
-  //   'Marc Leishman',
-  //   'Tony Finau',
-  //   'Dustin Johnson',
-  //   'Justin Rose',
-  //   'Justin Thomas',
-  //   'Jason Day',
-  //   'Si Woo Kim',
-  //   'Matt Kuchar'
-  // ];
-
   filteredPlayers: Observable<string[]>;
+  isEditable: boolean = false;
 
   constructor(private pgaService: PgaTourService) {}
 
   toggleAddNewPlayer = () => this.isAddNewPlayer = !this.isAddNewPlayer;
+  toggleEditable = () => this.isEditable = !this.isEditable;
   filter = (val: string): string[] => this.players.filter(option => option.toLowerCase().includes(val.toLowerCase()));
+  removePlayer = (index: number) => this.team.players.splice(index, 1);
 
   ngOnInit() {
+    this.maxPlayers = this.maxPlayers || 5;
+
     this.filteredPlayers = this.playerControl.valueChanges
       .pipe(
         startWith(''),
@@ -56,17 +45,20 @@ export class TeamCardComponent {
   addNewPlayer() {
     this.toggleAddNewPlayer();
 
-    let tempPlayer: Player = new Player();
-    let bio: PlayerBio = new PlayerBio();
-    let name = this.playerControl.value.split(' ');
-    bio.first_name = name[0];
-    bio.last_name = name[1];
-
-    tempPlayer.player_bio = bio;
-    
-    if (!this.team.players) this.team.players = new Array<Player>();
-
-    this.team.players.push(tempPlayer);
+    if (this.filter(this.playerControl.value).length != 0) {
+      console.log("okay?");
+      let tempPlayer: Player = new Player();
+      let bio: PlayerBio = new PlayerBio();
+      let name = this.playerControl.value.split(' ');
+      bio.first_name = name[0];
+      bio.last_name = name[1];
+  
+      tempPlayer.player_bio = bio;
+      
+      if (!this.team.players) this.team.players = new Array<Player>();
+  
+      this.team.players.push(tempPlayer);
+    }
 
     this.playerControl.reset();
   }
@@ -83,5 +75,28 @@ export class TeamCardComponent {
         this.players = players;
       })
     })
+  }
+  selectRandomPlayers() {
+    let localPlayers = this.players;
+    this.team.players = new Array<Player>();
+
+    if (!this.team.players) this.team.players = new Array<Player>();
+
+    for (let i = 0; i < this.maxPlayers; i++) {
+      let tempPlayer: Player = new Player();
+      let bio: PlayerBio = new PlayerBio();
+      let randomIndex = Math.round(Math.random() * (localPlayers.length - 1));
+      let playerName = localPlayers[randomIndex];
+      let nameArray = playerName.split(' ');
+
+      bio.first_name = nameArray[0];
+      bio.last_name = nameArray[1];
+    
+      tempPlayer.player_bio = bio;
+      this.team.players.push(tempPlayer);
+
+      // Remove currently selected player from list to limit duplicates.
+      localPlayers.splice(randomIndex, 1);
+    }
   }
 }

@@ -8,8 +8,37 @@
     height: 1em;
     margin: 5px;
     padding: 10px;
-    /* margin: 0; */
-    /* padding: 5px; */
+}
+.title {
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: 7fr 1fr;
+}
+
+.icon {
+    height: 20px;
+    width: 20px;
+    opacity: 0.5;
+}
+
+.icon-active {
+    background-color: white;
+}
+
+.icon:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.delete {
+    color: black;
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: red;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .form-element {
