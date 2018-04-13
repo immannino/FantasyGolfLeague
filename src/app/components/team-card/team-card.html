@@ -7,9 +7,15 @@
         </span>
     </mat-card-title>
     <mat-card-subtitle>{{team.firstName}} {{team.lastName}}</mat-card-subtitle>
-    <mat-card-content>
+    <mat-card-content *ngIf="displayTeam">
         <mat-card class="player" *ngFor="let player of team.players; let i = index;">
-            <p><a *ngIf="isEditable" class="delete" (click)="removePlayer(i);">x</a> {{player.player_bio.first_name}} {{player.player_bio.last_name}}</p>
+            <span><a *ngIf="isEditable" class="delete" (click)="removePlayer(i);">x</a> {{filterPosition(player)}}</span>
+            <span>{{player.player_bio.first_name}} {{player.player_bio.last_name}}</span>
+            <span [style.color]="setScoreColor(player.today)">{{filterScore(player.today)}}</span>
+            <span>{{player.thru}}</span>
+        </mat-card>
+        <mat-card *ngIf="displayTeam">
+            Team to Par: <span [style.color]="setScoreColor(filterTeamScore())">{{filterScore(filterTeamScore())}}</span> Total Strokes: {{getTeamStrokes()}}
         </mat-card>
         <form class="player-search-form" *ngIf="isAddNewPlayer">
             <a class="delete" (click)="toggleAddNewPlayer()">x</a>

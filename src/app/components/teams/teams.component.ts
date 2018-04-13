@@ -23,64 +23,46 @@ export class TeamComponent {
   }
   createLeagueTeams() {
 
-    // let players: Player[] = new Array<Player>();
-    // let players2: Player[] = new Array<Player>();
-    // let players3: Player[] = new Array<Player>();
-    // let players4: Player[] = new Array<Player>();
-    // let players5: Player[] = new Array<Player>();
-    let player: Player = new Player();
-    player.current_position = "T5";
-    player.current_round = 4;
-    player.player_bio = new PlayerBio();
-    player.player_bio.country = 'USA';
-    player.player_bio.first_name = "Tiger";
-    player.player_bio.last_name = "Woods";
-    player.player_bio.short_name = "Tiger";
-    player.today = -5;
-    player.total = -10;
+    let players: Player[] = new Array<Player>();
 
-    // players.push(player);
-    // players.push(player);
-    // players.push(player);
-    // players.push(player);
-    // players.push(player);
+    let robert: Player = new Player();
+    robert.player_bio = new PlayerBio();
+    robert.player_bio.first_name = "Robert";
+    robert.player_bio.last_name = "Streb";
 
-    // players2.push(player);
-    // players2.push(player);
-    // players2.push(player);
-    // players2.push(player);
-    // players2.push(player);
+    let matthew: Player = new Player();
+    matthew.player_bio = new PlayerBio();
+    matthew.player_bio.first_name = "Matthew";
+    matthew.player_bio.last_name = "Fitzpatrick";
+    
+    let jeff: Player = new Player();
+    jeff.player_bio = new PlayerBio();
+    jeff.player_bio.first_name = "Jeff";
+    jeff.player_bio.last_name = "Maggert";
 
-    // players3.push(player);
-    // players3.push(player);
-    // players3.push(player);
-    // players3.push(player);
-    // players3.push(player);
+    let kevin: Player = new Player();
+    kevin.player_bio = new PlayerBio();
+    kevin.player_bio.first_name = "Kevin";
+    kevin.player_bio.last_name = "Na";
 
-    // players4.push(player);
-    // players4.push(player);
-    // players4.push(player);
-    // players4.push(player);
-    // players4.push(player);
+    let fran: Player = new Player();
+    fran.player_bio = new PlayerBio();
+    fran.player_bio.country = 'USA';
+    fran.player_bio.first_name = "Francesco";
+    fran.player_bio.last_name = "Molinari";
 
-    // players5.push(player);
-    // players5.push(player);
-    // players5.push(player);
-    // players5.push(player);
-    // players5.push(player);
+    players.push(robert);
+    players.push(matthew);
+    players.push(jeff);
+    players.push(kevin);
+    players.push(fran);
 
-    // this.league.teams.push(new Team("Team Spike", "Spike", "McBullah", this.randomHexColorCode(), "email@test.ts", players));
-    // this.league.teams.push(new Team("Team Schmidt", "Schmidt", "", this.randomHexColorCode(), "email@test.ts", players2));
-    // this.league.teams.push(new Team("Team Tys", "Matty", "Tys", this.randomHexColorCode(), "email@test.ts", players3));
-    // this.league.teams.push(new Team("Team Neppach", "Mike", "Neppach", this.randomHexColorCode(), "email@test.ts", players4));
-    // this.league.teams.push(new Team("Team Tones", "Tones", "McBones", this.randomHexColorCode(), "email@test.ts", players5));
-
-    this.league.teams.push(new Team("Team Spike", "Spike", "McBullah", this.randomHexColorCode(), "email@test.ts"));
-    this.league.teams.push(new Team("Team Schmidt", "Schmidt", "", this.randomHexColorCode(), "email@test.ts"));
-    this.league.teams.push(new Team("Team Tys", "Matty", "Tys", this.randomHexColorCode(), "email@test.ts"));
-    this.league.teams.push(new Team("Team Neppach", "Mike", "Biggums", this.randomHexColorCode(), "email@test.ts"));
-    this.league.teams.push(new Team("Team Tones", "Tones", "McBones", this.randomHexColorCode(), "email@test.ts"));
-    this.league.teams.push(new Team("Team Brock", "Brock", "Samford", this.randomHexColorCode(), "email@test.ts"));
+    // this.league.teams.push(new Team("Team Spike", "Spike", "McBullah", this.randomHexColorCode(), "email@test.ts"));
+    // this.league.teams.push(new Team("Team Schmidt", "Schmidt", "", this.randomHexColorCode(), "email@test.ts"));
+    // this.league.teams.push(new Team("Team Tys", "Matty", "Tys", this.randomHexColorCode(), "email@test.ts"));
+    // this.league.teams.push(new Team("Team Neppach", "Mike", "Biggums", this.randomHexColorCode(), "email@test.ts"));
+    this.league.teams.push(new Team("Team Test", "Tones", "Malones", this.randomHexColorCode(), "email@test.ts", players));
+    // this.league.teams.push(new Team("Team Brock", "Brock", "Samford", this.randomHexColorCode(), "email@test.ts"));
   }
 
   deleteTeam(index: number) {

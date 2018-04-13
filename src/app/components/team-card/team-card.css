@@ -5,7 +5,10 @@
 }
 
 .player {
-    height: 1em;
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    height: 2em;
     margin: 5px;
     padding: 10px;
 }

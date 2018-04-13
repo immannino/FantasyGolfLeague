@@ -22,16 +22,26 @@ export class TeamCardComponent {
 
   isAddNewPlayer: boolean = false;
   playerControl: FormControl = new FormControl();
-  players = [];
+  playerFilterList = [];
+  tournamentPlayers: Player[];
   filteredPlayers: Observable<string[]>;
   isEditable: boolean = false;
+  displayTeam: boolean = false;
 
   constructor(private pgaService: PgaTourService) {}
 
   toggleAddNewPlayer = () => this.isAddNewPlayer = !this.isAddNewPlayer;
   toggleEditable = () => this.isEditable = !this.isEditable;
-  filter = (val: string): string[] => this.players.filter(option => option.toLowerCase().includes(val.toLowerCase()));
+  filter = (val: string): string[] => {
+    return val ? this.playerFilterList.filter(option => option.toLowerCase().includes(val.toLowerCase())) : [];
+  }
   removePlayer = (index: number) => this.team.players.splice(index, 1);
+
+  //Utils. Abstract out to Utils.d.ts or something
+  filterPosition = (player: Player): string => player.status.toLowerCase() === 'cut' ? 'CUT' : player.current_position;
+  isCut = (player: Player): boolean => player.status.toLowerCase() === 'cut' ? true : false;
+  filterScore = (score: number): string => score > 0 ? "+" + score : score < 0 ? String(score) : "E";
+  setScoreColor = (score: number) => score > 0 ? 'green' : score < 0 ? 'red' : 'black';
 
   ngOnInit() {
     this.maxPlayers = this.maxPlayers || 5;
@@ -49,14 +59,8 @@ export class TeamCardComponent {
     this.toggleAddNewPlayer();
 
     if (this.filter(this.playerControl.value).length != 0) {
-      console.log("okay?");
-      let tempPlayer: Player = new Player();
-      let bio: PlayerBio = new PlayerBio();
       let name = this.playerControl.value.split(' ');
-      bio.first_name = name[0];
-      bio.last_name = name[1];
-  
-      tempPlayer.player_bio = bio;
+      let tempPlayer: Player = this.getPlayerObject(name[0], name[1]);
       
       if (!this.team.players) this.team.players = new Array<Player>();
   
@@ -86,36 +90,74 @@ export class TeamCardComponent {
   }
 
   loadPlayersList() {
+    this.tournamentPlayers = new Array<Player>();
+
     this.pgaService.getCurrentTournamentId().subscribe((data: CurrentTournament) => {
       this.pgaService.getTournamentData(data.tid).subscribe((data: TournamentData) => {
         let players = [];
         let localPlayers = data.leaderboard.players;
+
         for (let i = 0; i < localPlayers.length; i++) {
           players.push(localPlayers[i].player_bio.first_name + ' ' + localPlayers[i].player_bio.last_name);
         }
 
-        this.players = players;
+        this.playerFilterList = players;
+        this.tournamentPlayers = localPlayers;
+
+        this.updateTeamPlayerScores();
       })
     })
   }
+
+  updateTeamPlayerScores() {
+    if (this.team.players && this.team.players.length) {
+      let tempPlayerList: Player[] = new Array<Player>();
+
+      for (let i = 0; i < this.team.players.length; i++) {
+        let tempPlayer: Player = this.getPlayerObject(this.team.players[i].player_bio.first_name, this.team.players[i].player_bio.last_name);
+
+        tempPlayerList.push(tempPlayer);
+      }
+
+      this.team.players = tempPlayerList;
+    }
+
+    this.displayTeam = true;
+  }
+
+  getPlayerObject(firstName: string, lastName: string): Player {
+    let filterFirstName = (firstName: string) => this.tournamentPlayers.filter((option: Player) => option.player_bio.first_name.toLowerCase().includes(firstName.toLowerCase()));
+    let filterLastName = (lastName: string, list: Player[]) => list.filter((option: Player) => option.player_bio.last_name.toLowerCase().includes(lastName.toLowerCase()));
+    let filteredList = filterFirstName(firstName);
+
+    if (filteredList.length > 1) {
+      filteredList = filterLastName(lastName, filteredList);
+    }
+
+    return filteredList[0];
+  }
+
+  getTeamStrokes(): number {
+    return this.team.players.map(option => option.total_strokes).reduce((a, c) => a + c);
+  }
+
+  filterTeamScore(): number {
+    return this.team.players.map(option => option.total).reduce((a, c) => a + c);
+  }
+
   selectRandomPlayers() {
-    let localPlayers = this.players;
+    let localPlayers = this.playerFilterList;
     this.team.players = new Array<Player>();
 
     if (!this.team.players) this.team.players = new Array<Player>();
 
     for (let i = 0; i < this.maxPlayers; i++) {
-      let tempPlayer: Player = new Player();
-      let bio: PlayerBio = new PlayerBio();
       let randomIndex = Math.round(Math.random() * (localPlayers.length - 1));
       let playerName = localPlayers[randomIndex];
       let nameArray = playerName.split(' ');
+      let player: Player = this.getPlayerObject(nameArray[0], nameArray[1]);
 
-      bio.first_name = nameArray[0];
-      bio.last_name = nameArray[1];
-    
-      tempPlayer.player_bio = bio;
-      this.team.players.push(tempPlayer);
+      this.team.players.push(player);
 
       // Remove currently selected player from list to limit duplicates.
       localPlayers.splice(randomIndex, 1);

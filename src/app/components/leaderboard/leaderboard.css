@@ -3,7 +3,8 @@
 }
 
 .table {
-    overflow-x: scroll;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     /* background: linear-gradient(white, #076652); */
 }
 
