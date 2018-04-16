@@ -1,6 +1,6 @@
 rm -rf docs/
 
-ng build --prod --aot --output-path docs --base-href "https://immannino.github.io/FantasyGolfLeague/"
+ng build  --aot --prod --output-path docs --base-href "https://immannino.github.io/FantasyGolfLeague/"
 
 cd ./docs/ && cp index.html ./404.html && cd ../
 

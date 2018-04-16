@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { PgaTourService } from '../../lib/pgatour/pgatour.service';
 import { TournamentData, CurrentTournament, Player } from '../../lib/pgatour/pgatour.model';
 import { MatTableDataSource, MatSort } from '@angular/material';
+import { DisplayHelpers } from '../../lib/utilities/display.helpers';
 
 @Component({
   selector: 'leaderboard',
@@ -9,7 +10,8 @@ import { MatTableDataSource, MatSort } from '@angular/material';
   styleUrls: ['./leaderboard.css']
 })
 export class LeaderboardComponent {
-    constructor(private pgatourService: PgaTourService) {}
+    constructor(private pgatourService: PgaTourService,  private displayHelper: DisplayHelpers) {}
+
     tournamentMetaData: CurrentTournament;
     tournamentData: TournamentData;
     // displayedColumns = ['current_position', 'player_bio', 'today', 'total', 'thru', 'teeTime', 'R1', 'R2', 'R3', 'R4'];
@@ -19,10 +21,6 @@ export class LeaderboardComponent {
     @ViewChild(MatSort) sort: MatSort;
 
     trimDate = (date): string =>  String(date).substring(11);
-    filterPosition = (player: Player): string => player.status.toLowerCase() === 'cut' ? 'CUT' : player.current_position;
-    isCut = (player: Player): boolean => player.status.toLowerCase() === 'cut' ? true : false;
-    filterScore = (score: number): string => score > 0 ? "+" + score : score < 0 ? String(score) : "E";
-    setScoreColor = (score: number) => score > 0 ? 'green' : score < 0 ? 'red' : 'black';
 
     ngOnInit() {
       this.tournamentData = new TournamentData();

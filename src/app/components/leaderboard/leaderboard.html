@@ -13,7 +13,7 @@
             <mat-table class="table-data" #table [dataSource]="tableDataSource" matSort>
                 <ng-container matColumnDef="current_position">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Position </mat-header-cell>
-                    <mat-cell *matCellDef="let player"> {{filterPosition(player)}} </mat-cell>
+                    <mat-cell *matCellDef="let player"> {{displayHelper.filterPosition(player)}} </mat-cell>
                 </ng-container>
         
                 <ng-container matColumnDef="player_bio">
@@ -23,12 +23,12 @@
         
                 <ng-container matColumnDef="today">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Round Score </mat-header-cell>
-                    <mat-cell *matCellDef="let player" [style.color]="setScoreColor(player.today)"> {{filterScore(player.today)}} </mat-cell>
+                    <mat-cell *matCellDef="let player" [style.color]="displayHelper.setScoreColor(player.today)"> {{displayHelper.filterScore(player.today)}} </mat-cell>
                 </ng-container>
         
                 <ng-container matColumnDef="total">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Overall Score </mat-header-cell>
-                    <mat-cell *matCellDef="let player" [style.color]="setScoreColor(player.total)"> {{filterScore(player.total)}} </mat-cell>
+                    <mat-cell *matCellDef="let player" [style.color]="displayHelper.setScoreColor(player.total)"> {{displayHelper.filterScore(player.total)}} </mat-cell>
                 </ng-container>
         
                 <ng-container matColumnDef="thru">
@@ -63,7 +63,7 @@
         
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns; let player" 
-                [ngClass]="{ 'is-cut': isCut(player) }"></mat-row>
+                [ngClass]="{ 'is-cut': displayHelper.isCut(player) }"></mat-row>
             </mat-table>
         </div>
     </div>

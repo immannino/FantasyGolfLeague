@@ -10,6 +10,13 @@ Create a fantasy board, invite your friends, wager offline bets, and more.
 
 ![caddy shack](https://media.giphy.com/media/l0MYrjjW6Dq7HoGu4/giphy.gif)
 
+TODO: 
+
+Find a color picker that works on mobile. 
+
+Pages: 
+    League Standings
+    
 
 Notes:
     - Child routing issues, when developing locally, in the index.html change the base href to "/" instead of "./". Change back to "./" when deploying.

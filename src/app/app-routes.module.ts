@@ -3,6 +3,7 @@ import { RouterModule, Routes }  from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { TeamComponent } from './components/teams/teams.component';
+import { LeagueStandingsComponent } from './components/league-standings/league-standings.component';
 
 const appRoutes: Routes = [
     { 
@@ -12,6 +13,7 @@ const appRoutes: Routes = [
             { path: '', redirectTo: 'leaderboard', pathMatch: 'full' },
             { path: 'leaderboard', component: LeaderboardComponent },
             { path: 'teams', component: TeamComponent },
+            { path: 'league-standings', component: LeagueStandingsComponent },
             { path: '**', redirectTo: 'leaderboard', pathMatch: 'full' },
         ]
     },

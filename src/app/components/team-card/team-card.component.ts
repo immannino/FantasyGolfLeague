@@ -6,6 +6,7 @@ import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { Player, PlayerBio, CurrentTournament, TournamentData } from '../../lib/pgatour/pgatour.model';
 import { PgaTourService } from '../../lib/pgatour/pgatour.service';
+import { DisplayHelpers } from '../../lib/utilities/display.helpers';
 
 @Component({
   selector: 'team-card',
@@ -28,20 +29,17 @@ export class TeamCardComponent {
   isEditable: boolean = false;
   displayTeam: boolean = false;
 
-  constructor(private pgaService: PgaTourService) {}
+  constructor(private pgaService: PgaTourService, private displayHelper: DisplayHelpers) {}
 
   toggleAddNewPlayer = () => this.isAddNewPlayer = !this.isAddNewPlayer;
   toggleEditable = () => this.isEditable = !this.isEditable;
   filter = (val: string): string[] => {
-    return val ? this.playerFilterList.filter(option => option.toLowerCase().includes(val.toLowerCase())) : [];
+    return val ? this.playerFilterList.filter(option => option.toLowerCase().includes(val.toLowerCase())) : val == "" ? this.playerFilterList : [];
+  }
+  displayTeamStats(): boolean {
+    return (!this.isEditable && this.displayTeam && this.team.players && (this.team.players.length != 0))
   }
   removePlayer = (index: number) => this.team.players.splice(index, 1);
-
-  //Utils. Abstract out to Utils.d.ts or something
-  filterPosition = (player: Player): string => player.status.toLowerCase() === 'cut' ? 'CUT' : player.current_position;
-  isCut = (player: Player): boolean => player.status.toLowerCase() === 'cut' ? true : false;
-  filterScore = (score: number): string => score > 0 ? "+" + score : score < 0 ? String(score) : "E";
-  setScoreColor = (score: number) => score > 0 ? 'green' : score < 0 ? 'red' : 'black';
 
   ngOnInit() {
     this.maxPlayers = this.maxPlayers || 5;

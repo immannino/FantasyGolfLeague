@@ -14,6 +14,9 @@ import { AddTeamComponent, AddTeamDialogTemplate } from './components/add-team-m
 import { FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { TeamComponent } from './components/teams/teams.component';
 import { TeamCardComponent } from './components/team-card/team-card.component';
+import { DisplayHelpers } from './lib/utilities/display.helpers';
+import { LeagueStandingsComponent } from './components/league-standings/league-standings.component';
+import { LeagueService } from './lib/firebase/league.service';
 
 
 @NgModule({
@@ -25,7 +28,8 @@ import { TeamCardComponent } from './components/team-card/team-card.component';
     AddTeamComponent,
     AddTeamDialogTemplate,
     TeamComponent,
-    TeamCardComponent
+    TeamCardComponent,
+    LeagueStandingsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,7 @@ import { TeamCardComponent } from './components/team-card/team-card.component';
     ReactiveFormsModule
   ],
   entryComponents: [ AddTeamDialogTemplate],
-  providers: [ PgaTourService ],
+  providers: [ PgaTourService, DisplayHelpers, LeagueService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

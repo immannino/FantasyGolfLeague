@@ -1,0 +1,33 @@
+<div class="container" *ngIf="displayTeam">
+    <mat-card class="current-tournament">
+        <mat-table class="current-table" #table [dataSource]="league.teams">
+            <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
+                <mat-cell *matCellDef="let team"> 1 </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="team">
+                <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
+                <mat-cell *matCellDef="let team"> {{team.teamName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="team_score">
+                <mat-header-cell *matHeaderCellDef> Score </mat-header-cell>
+                <mat-cell *matCellDef="let team" [style.color]="displayHelper.setScoreColor(filterTeamScore(team.players))"> {{filterTeamScore(team.players)}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="team_strokes">
+                <mat-header-cell *matHeaderCellDef> Strokes </mat-header-cell>
+                <mat-cell *matCellDef="let team"> {{filterTeamStrokes(team.players)}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="players_active">
+                <mat-header-cell *matHeaderCellDef> Players Active </mat-header-cell>
+                <mat-cell *matCellDef="let team"> {{filterActivePlayers(team.players)}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="currentTournamentColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: currentTournamentColumns; let team" ></mat-row>
+        </mat-table>
+    </mat-card>
+</div>
